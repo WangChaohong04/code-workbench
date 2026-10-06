@@ -1,0 +1,24 @@
+# LongFlow 主配置（SPEC §0/§5/§8）
+# 密钥绝不写入本文件：OpenAI 兼容驱动的 Key 只从环境变量 LLM_API_KEY 读取。
+
+llm:
+  # Ollama 本机 OpenAI 兼容接口；密钥仍只从环境变量 LLM_API_KEY 读取。
+  driver: openai_compatible
+  base_url: "http://127.0.0.1:11434/v1"
+  model: "longflow-qwen"
+  timeout_seconds: 300
+  strict: true
+  max_retries: 0
+
+# 编排预算与恢复循环（SPEC §6）
+limits:
+  max_steps: 30
+  max_llm_calls: 80
+  tick_interval_seconds: 2
+  max_verify_rounds: 2
+
+server:
+  host: "127.0.0.1"
+  port: 8765
+
+# Scenarios are supplied by the software-engineering runtime; no unrelated domain packs are enabled.

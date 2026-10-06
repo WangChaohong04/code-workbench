@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-locale-root>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title data-i18n="brand">工程安全台 · AI 软件工程</title>
+  <link rel="stylesheet" href="style.css?v=engineering-console-2">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2315222c'/%3E%3Cpath d='M9 10l-4 6 4 6m14-12l4 6-4 6m-5-15l-4 18' fill='none' stroke='%237be3bc' stroke-width='2'/%3E%3C/svg%3E">
+</head>
+<body>
+  <a class="skip-link" href="#app" data-i18n="skip">跳至工作区</a>
+  <aside class="sidebar" aria-label="工作台导航">
+    <button id="brand" class="identity" type="button" aria-label="工程安全台，返回任务">
+      <span class="identity-symbol" aria-hidden="true">&lt;/&gt;</span>
+      <span><strong data-i18n="brand">工程安全台</strong><small>AI ENGINEERING CONTROL</small></span>
+    </button>
+    <div class="sidebar-caption" data-i18n="workspace">工作空间</div>
+    <nav class="navigation" aria-label="主导航">
+      <button type="button" data-view="tasks"><span aria-hidden="true">▤</span> <span data-i18n="tasks">开发任务</span></button>
+      <button type="button" data-view="new"><span aria-hidden="true">＋</span> <span data-i18n="newTask">创建任务</span></button>
+      <button type="button" data-view="files"><span aria-hidden="true">⌁</span> <span data-i18n="files">文件审阅</span></button>
+    </nav>
+    <section class="sidebar-boundary" aria-label="执行边界">
+      <span class="boundary-dot" aria-hidden="true"></span><strong data-i18n="boundary">隔离候选模式</strong>
+      <p data-i18n="boundaryText">先确认范围，再生成副本。<br>正式发布与数据库写入关闭。</p>
+    </section>
+    <div class="sidebar-bottom">
+      <div class="health" id="health" role="status"><span class="health-dot" aria-hidden="true"></span><span id="health-text" data-i18n="connecting">连接服务中</span></div>
+      <span class="sidebar-version" data-i18n="localDesk">本机工作台 / 审计优先</span>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="workspace-bar"><span>SOFTWARE ENGINEERING</span><span class="workspace-label" data-i18n="slogan">提议 ≠ 批准 ≠ 执行 ≠ 验证</span><button id="locale-toggle" class="locale-toggle" type="button" data-i18n-title="english" title="切换到 English">EN</button></header>
+    <main id="app" tabindex="-1"><p class="loading" role="status" data-i18n="loading">正在读取工作区…</p></main>
+    <footer class="workspace-footer" data-i18n="footer">仅展示服务端事实 · 未接入的能力不会标记完成</footer>
+  </div>
+  <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
+  <script type="module" src="app.js?v=engineering-console-2"></script>
+</body>
+</html>

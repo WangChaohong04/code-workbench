@@ -1,0 +1,13 @@
+# Production Adapter Boundaries
+
+The production_adapters module is an injectable control-plane contract, not an installed CI provider or a database client. It starts with no callbacks; capabilities return not_connected. No route accepts provider code, SQL, shell commands or credentials.
+
+A trusted server integration may supply deployment or database callbacks and a separate exact-proposal approval consumer. Proposals bind an artifact SHA-256, target/database, migration and backup identity, safety epoch, expiry and server-generated identifier. Payload is immutable; the exact registered object is required. Proposals are burned before approval/provider callbacks; failure is not a permission to replay.
+
+Provider evidence must be nonempty and bound to the exact proposal digest. accepted means submitted, not completed. A safety-epoch change or callback/transport interruption during execution is in_doubt: inspect the provider before creating a new proposal. A timeout cannot prove the provider did not accept the request. This wrapper cannot cancel a provider action already in flight or roll back production changes.
+
+Database callbacks must independently identify backup integrity, point-in-time recovery scope, migration checksums, exclusive execution, recovery verification and audit evidence. The current contract covers a migration plus backup identity and a restore proposal binding database, backup, recovery point and verification reference. A verification reference is not itself proof of backup integrity; the trusted provider must independently validate it. Actual restore provider support is still absent. CI callbacks must independently enforce target environment, immutable build artifact, branch provenance, verification status and rollout/rollback policy. None of these requirements are proven by mock unit tests.
+
+All registrations are in-memory. Restart loses pending proposals, which fail closed. Durable provider reconciliation, actual provider configuration, concrete rollout/migration/restore and production authorization remain outstanding work. No production provider has been chosen in this project.
+
+HTTP proposal/execute routes are available only when state.production_adapters contains the exact trusted ProductionAdapters instance. Every route is workspace/owner scoped, proposal fields are strict, server chooses expiry, and execute requires confirmed=true plus matching approval_id/proposal_id. Retained tests can be run manually with tools/test_engineering.ps1 -Suite Production. The default suite never contacts production. These tests are not executed by the implementation assistant.
